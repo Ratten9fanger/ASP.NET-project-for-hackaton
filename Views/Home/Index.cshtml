@@ -1,8 +1,112 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model Filter;
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<header>
+    <nav>
+        <a href="#" class="active">Главная</a>
+        <a href="#">Ответы на заявки</a> 
+        <a href="#">О нас</a>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+
+        <section class="bus-form">
+
+            <form asp-action="Filter" method="post" class="contact-form">
+
+                <label for="route">Маршрут:</label>
+                <select asp-for="route" id="route" name="route" required>
+                    <option value="" disabled selected>-- Выберите маршрут --</option>
+                    <option value="Уфа - Сочи">Уфа - Сочи</option>
+                    <option value="Уфа - Казань">Уфа - Казань</option>
+                    <option value="Стерлитамак - Уфа">Стерлитамак - Уфа</option>
+                    <option value="Ишимбай - Соль-Илецк">Ишимбай - Соль-Илецк</option>
+                </select>
+
+                <label for="date">Дата:</label>
+                <input asp-for="date" type="date" id="date" name="date" required>
+
+                <label for="comfort">Уровень комфорта:</label>
+                <select asp-for="comfort" id="comfort" name="comfort" required>
+                    <option value="" disabled selected>-- Выберите уровень комфорта --</option>
+                    <option value="Эконом">Эконом</option>
+                    <option value="Комфорт">Комфорт</option>
+                    <option value="Комфорт +">Комфорт +</option>
+                    <option value="Бизнес-класс">Бизнес-класс</option>
+                </select>
+
+                <label for="seats">Места:</label>
+                <select asp-for="seats" id="seats" name="seats" required>
+                    <option value="" disabled selected>-- Выберите кол-во мест --</option>
+                    <option value="5-9">5-9</option>
+                    <option value="10-20">10-20</option>
+                    <option value="21-30">21-30</option>
+                    <option value="31-45">31-45</option>
+                    <option value="31-40">31-40</option>
+                    <option value="46-60">46-60</option>
+                    <option value="61-90">61-90</option>
+                </select>
+
+                <label asp-for="conditioner" for="conditioner">
+                    <input asp-for="conditioner" type="checkbox" id="conditioner" name="conditioner">
+                    Кондиционер
+                </label>
+
+                <label asp-for="trunk" for="trunk">
+                    <input asp-for="trunk" type="checkbox" id="trunk" name="trunk">
+                    Багажник
+                </label>
+
+
+                <button type="submit">Найти</button>
+
+            </form>
+        </section>
+
+        <section class="results">
+
+            <h1>здесь будут отображаться результаты поиска</h1>
+
+            <div class="cards-container">
+                
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="Описание изображения" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">Заголовок карточки</h2>
+                        <p class="card-description">Краткое описание 1: Это первое описание карточки.</p>
+                        <p class="card-description">Краткое описание 2: Это второе описание карточки.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="Описание изображения" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">Заголовок карточки</h2>
+                        <p class="card-description">Краткое описание 1: Это первое описание карточки.</p>
+                        <p class="card-description">Краткое описание 2: Это второе описание карточки.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="Описание изображения" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">Заголовок карточки</h2>
+                        <p class="card-description">Краткое описание 1: Это первое описание карточки.</p>
+                        <p class="card-description">Краткое описание 2: Это второе описание карточки.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2023 Все права защищены</p>
+</footer>

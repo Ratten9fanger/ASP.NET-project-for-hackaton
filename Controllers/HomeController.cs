@@ -18,10 +18,13 @@ namespace hackaton.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Filter(Filter filter)
         {
-            return View();
+            Console.WriteLine($"{filter.route}, {filter.date}, {filter.comfort}, {filter.seats}, {filter.trunk}, {filter.conditioner},");
+            return RedirectToAction("Index");
         }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
