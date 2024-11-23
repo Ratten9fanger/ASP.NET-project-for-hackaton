@@ -22,7 +22,7 @@
                 <input type="hidden" name="isSecondTime" value="true" />
 
                 <label for="route">Маршрут:</label>
-                <select asp-for="filter.route" id="route" name="route" required>
+                <select asp-for="filter.route" id="route" name="filter.route" required>
                     <option value="" disabled selected>-- Выберите маршрут --</option>
                     <option value="Уфа - Сочи">Уфа - Сочи</option>
                     <option value="Уфа - Казань">Уфа - Казань</option>
@@ -31,10 +31,10 @@
                 </select>
 
                 <label for="date">Дата:</label>
-                <input asp-for="filter.date" type="date" id="date" name="date" required>
+                <input asp-for="filter.date" type="date" id="date" name="filter.date" required>
 
                 <label for="comfort">Уровень комфорта:</label>
-                <select asp-for="filter.comfort" id="comfort" name="comfort" required>
+                <select asp-for="filter.comfort" id="comfort" name="filter.comfort" required>
                     <option value="" disabled selected>-- Выберите уровень комфорта --</option>
                     <option value="Эконом">Эконом</option>
                     <option value="Комфорт">Комфорт</option>
@@ -43,7 +43,7 @@
                 </select>
 
                 <label for="seats">Места:</label>
-                <select asp-for="filter.seats" id="seats" name="seats" required>
+                <select asp-for="filter.seats" id="seats" name="filter.seats" required>
                     <option value="" disabled selected>-- Выберите кол-во мест --</option>
                     <option value="5-9">5-9</option>
                     <option value="10-20">10-20</option>
@@ -55,12 +55,12 @@
                 </select>
 
                 <label asp-for="filter.conditioner" for="conditioner">
-                    <input asp-for="filter.conditioner" type="checkbox" id="conditioner" name="conditioner">
+                    <input asp-for="filter.conditioner" type="checkbox" id="conditioner" name="filter.conditioner">
                     Кондиционер
                 </label>
 
                 <label asp-for="filter.trunk" for="trunk">
-                    <input asp-for="filter.trunk" type="checkbox" id="trunk" name="trunk">
+                    <input asp-for="filter.trunk" type="checkbox" id="trunk" name="filter.trunk">
                     Багажник
                 </label>
 

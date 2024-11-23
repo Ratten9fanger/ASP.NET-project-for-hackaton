@@ -42,33 +42,36 @@ namespace hackaton.Controllers
                     query = query.Where(b => b.route == filter.route);
                 }
 
-                //if (filter.date != null)
-                //{
-                //    query = query.Where(b => b.date == filter.date);
-                //}
+                if (filter.date != null)
+                {
+                    query = query.Where(b => b.date == filter.date);
+                }
 
-                //if (!string.IsNullOrEmpty(filter.comfort))
-                //{
-                //    query = query.Where(b => b.comfort == filter.comfort);
-                //}
+                if (!string.IsNullOrEmpty(filter.comfort))
+                {
+                    query = query.Where(b => b.comfort == filter.comfort);
+                }
 
-                //if (!string.IsNullOrEmpty(filter.seats))
-                //{
-                //    query = query.Where(b => b.seats == filter.seats);
-                //}
+                if (!string.IsNullOrEmpty(filter.seats))
+                {
+                    query = query.Where(b => b.seats == filter.seats);
+                }
 
-                //if (filter.conditioner != null)
-                //{
-                //    query = query.Where(b => b.conditioner == filter.conditioner);
-                //}
+                if (filter.conditioner != null)
+                {
+                    query = query.Where(b => b.conditioner == filter.conditioner);
+                }
 
-                //if (filter.trunk != null)
-                //{
-                //    query = query.Where(b => b.trunk == filter.trunk);
-                //}
+                if (filter.trunk != null)
+                {
+                    query = query.Where(b => b.trunk == filter.trunk);
+                }
 
                 model.buses = query.ToList();
 
+                //Console.WriteLine(filter.trunk + " f " + filter.conditioner);
+
+                //Console.WriteLine("from db " + db.Buses.ToList()[0].conditioner);
             }
 
             return View(model);

@@ -5,7 +5,7 @@
 
         public string route { get; set; }
 
-        public DateOnly date { get; set; }
+        public DateOnly date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
         public string comfort { get; set; }
 
