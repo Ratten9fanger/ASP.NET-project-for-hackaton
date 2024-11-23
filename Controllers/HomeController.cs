@@ -12,7 +12,6 @@ namespace hackaton.Controllers
         ApplicationDBContext db;
         bool isSecondTime = false;
 
-
         public HomeController(ApplicationDBContext context)
         {
             db = context;
@@ -27,6 +26,12 @@ namespace hackaton.Controllers
 
         public IActionResult Index(Filter filter, bool isSecondTime = false)
         {
+
+            var model = new BusWithFilter 
+            {
+                filter = filter,
+                buses = new List<Bus>() // Изначально пустой список автобусов
+            };
 
             var query = db.Buses.AsQueryable();
 
@@ -62,31 +67,19 @@ namespace hackaton.Controllers
                 //    query = query.Where(b => b.trunk == filter.trunk);
                 //}
 
-                var buses = db.Buses.ToList();
-                var fbuses = query.ToList();
+                model.buses = query.ToList();
 
-                foreach (var entity in buses)
-                {
-                    Console.WriteLine(entity.id);
-                }
-
-                foreach (var entity in fbuses)
-                {
-                    Console.WriteLine("f" + entity.id);
-                }
             }
 
-            isSecondTime = true;
-
-            return View();
+            return View(model);
 
         }
 
-        public IActionResult Filter(Filter filter)
+/*        public IActionResult Filter(Filter filter)
         {
             Console.WriteLine($"{filter.route}, {filter.date}, {filter.comfort}, {filter.seats}, {filter.trunk}, {filter.conditioner},");
             return RedirectToAction("Index");
-        }
+        }*/
 
 
 

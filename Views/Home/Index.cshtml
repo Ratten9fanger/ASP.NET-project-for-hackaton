@@ -1,8 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model Filter;
 
+@model BusWithFilter;
 
 <header>
     <nav>
@@ -22,7 +22,7 @@
                 <input type="hidden" name="isSecondTime" value="true" />
 
                 <label for="route">Маршрут:</label>
-                <select asp-for="route" id="route" name="route" required>
+                <select asp-for="filter.route" id="route" name="route" required>
                     <option value="" disabled selected>-- Выберите маршрут --</option>
                     <option value="Уфа - Сочи">Уфа - Сочи</option>
                     <option value="Уфа - Казань">Уфа - Казань</option>
@@ -31,10 +31,10 @@
                 </select>
 
                 <label for="date">Дата:</label>
-                <input asp-for="date" type="date" id="date" name="date" required>
+                <input asp-for="filter.date" type="date" id="date" name="date" required>
 
                 <label for="comfort">Уровень комфорта:</label>
-                <select asp-for="comfort" id="comfort" name="comfort" required>
+                <select asp-for="filter.comfort" id="comfort" name="comfort" required>
                     <option value="" disabled selected>-- Выберите уровень комфорта --</option>
                     <option value="Эконом">Эконом</option>
                     <option value="Комфорт">Комфорт</option>
@@ -43,7 +43,7 @@
                 </select>
 
                 <label for="seats">Места:</label>
-                <select asp-for="seats" id="seats" name="seats" required>
+                <select asp-for="filter.seats" id="seats" name="seats" required>
                     <option value="" disabled selected>-- Выберите кол-во мест --</option>
                     <option value="5-9">5-9</option>
                     <option value="10-20">10-20</option>
@@ -54,13 +54,13 @@
                     <option value="61-90">61-90</option>
                 </select>
 
-                <label asp-for="conditioner" for="conditioner">
-                    <input asp-for="conditioner" type="checkbox" id="conditioner" name="conditioner">
+                <label asp-for="filter.conditioner" for="conditioner">
+                    <input asp-for="filter.conditioner" type="checkbox" id="conditioner" name="conditioner">
                     Кондиционер
                 </label>
 
-                <label asp-for="trunk" for="trunk">
-                    <input asp-for="trunk" type="checkbox" id="trunk" name="trunk">
+                <label asp-for="filter.trunk" for="trunk">
+                    <input asp-for="filter.trunk" type="checkbox" id="trunk" name="trunk">
                     Багажник
                 </label>
 
@@ -72,43 +72,37 @@
 
         <section class="results">
 
-            <h1>здесь будут отображаться результаты поиска</h1>
+            <h1>Примените фильтры и результаты поиска будут ниже</h1>
 
             <div class="cards-container">
                 
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" alt="Описание изображения" class="card-image">
-                    <div class="card-content">
-                        <h2 class="card-title">Заголовок карточки</h2>
-                        <p class="card-description">Краткое описание 1: Это первое описание карточки.</p>
-                        <p class="card-description">Краткое описание 2: Это второе описание карточки.</p>
-                    </div>
+                @if (Model.buses != null && Model.buses.Any())
+                {
+                        @foreach (var bus in Model.buses)
+                        {
+                        <div class="card">
 
-                  @* ОБРАБОТКА ВЫБОРА *@
-                    <label for="isSelected"> 
-                        <input type="checkbox" id="isSelected" name="isSelected">
-                        Выбрать
-                    </label>
+                            <img src="@bus.img" alt="bus" class="card-image">
+                    
+                            <div class="card-content">
+                                <h2 class="card-title">@bus.route</h2>
+                                <p class="card-description">@bus.date</p>
+                                <p class="card-description">@bus.comfort</p>
+                            </div>
 
-                </div>
+                          @* ОБРАБОТКА ВЫБОРА *@
+                            <label for="isSelected"> 
+                                <input type="checkbox" id="isSelected" name="isSelected">
+                                Выбрать
+                            </label>
 
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" alt="Описание изображения" class="card-image">
-                    <div class="card-content">
-                        <h2 class="card-title">Заголовок карточки</h2>
-                        <p class="card-description">Краткое описание 1: Это первое описание карточки.</p>
-                        <p class="card-description">Краткое описание 2: Это второе описание карточки.</p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" alt="Описание изображения" class="card-image">
-                    <div class="card-content">
-                        <h2 class="card-title">Заголовок карточки</h2>
-                        <p class="card-description">Краткое описание 1: Это первое описание карточки.</p>
-                        <p class="card-description">Краткое описание 2: Это второе описание карточки.</p>
-                    </div>
-                </div>
+                        </div>
+                        }
+                }
+                else
+                {
+                    <p>Нет доступных автобусов для выбранных фильтров.</p>
+                }
 
             </div>
         </section>
@@ -117,5 +111,5 @@
 </main>
 
 <footer>
-    <p>&copy; 2023 Все права защищены</p>
+    <p>&copy; 2024 Урал Батыр</p>
 </footer>

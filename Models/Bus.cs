@@ -19,5 +19,7 @@
         public bool isSelected { get; set; }
 
         public string tg_name { get; set; }
+
+        public string img { get; set; }
     }
 }
