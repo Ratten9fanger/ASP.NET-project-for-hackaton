@@ -19,6 +19,8 @@
 
             <form asp-action="Index" method="post" class="contact-form">
 
+                <input type="hidden" name="isSecondTime" value="true" />
+
                 <label for="route">Маршрут:</label>
                 <select asp-for="route" id="route" name="route" required>
                     <option value="" disabled selected>-- Выберите маршрут --</option>

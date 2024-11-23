@@ -10,6 +10,8 @@ namespace hackaton.Controllers
     public class HomeController : Controller
     {
         ApplicationDBContext db;
+        bool isSecondTime = false;
+
 
         public HomeController(ApplicationDBContext context)
         {
@@ -23,53 +25,58 @@ namespace hackaton.Controllers
         //    _logger = logger;
         //}
 
-        public IActionResult Index(Filter filter)
+        public IActionResult Index(Filter filter, bool isSecondTime = false)
         {
 
             var query = db.Buses.AsQueryable();
 
-            //if (!string.IsNullOrEmpty(filter.route))
-            //{
-            //    query = query.Where(b => b.route == filter.route);
-            //}
-
-            if (filter.date != null)
+            if (isSecondTime)
             {
-                query = query.Where(b => b.date == filter.date);
+                if (!string.IsNullOrEmpty(filter.route))
+                {
+                    query = query.Where(b => b.route == filter.route);
+                }
+
+                //if (filter.date != null)
+                //{
+                //    query = query.Where(b => b.date == filter.date);
+                //}
+
+                //if (!string.IsNullOrEmpty(filter.comfort))
+                //{
+                //    query = query.Where(b => b.comfort == filter.comfort);
+                //}
+
+                //if (!string.IsNullOrEmpty(filter.seats))
+                //{
+                //    query = query.Where(b => b.seats == filter.seats);
+                //}
+
+                //if (filter.conditioner != null)
+                //{
+                //    query = query.Where(b => b.conditioner == filter.conditioner);
+                //}
+
+                //if (filter.trunk != null)
+                //{
+                //    query = query.Where(b => b.trunk == filter.trunk);
+                //}
+
+                var buses = db.Buses.ToList();
+                var fbuses = query.ToList();
+
+                foreach (var entity in buses)
+                {
+                    Console.WriteLine(entity.id);
+                }
+
+                foreach (var entity in fbuses)
+                {
+                    Console.WriteLine("f" + entity.id);
+                }
             }
 
-            //if (!string.IsNullOrEmpty(filter.comfort))
-            //{
-            //    query = query.Where(b => b.comfort == filter.comfort);
-            //}
-
-            //if (!string.IsNullOrEmpty(filter.seats))
-            //{
-            //    query = query.Where(b => b.seats == filter.seats);
-            //}
-
-            //if (filter.conditioner != null)
-            //{
-            //    query = query.Where(b => b.conditioner == filter.conditioner);
-            //}
-
-            //if (filter.trunk != null)
-            //{
-            //    query = query.Where(b => b.trunk == filter.trunk);
-            //}
-
-            //var buses = db.Buses.ToList();
-            //var fbuses = query.ToList();
-
-            //foreach (var entity in buses)
-            //{
-            //    Console.WriteLine(entity.id);
-            //}
-
-            //foreach (var entity in fbuses)
-            //{
-            //    Console.WriteLine("f" + entity.id);
-            //}
+            isSecondTime = true;
 
             return View();
 
