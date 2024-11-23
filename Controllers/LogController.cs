@@ -1,25 +1,48 @@
-﻿using hackaton.Models; 
+﻿using hackaton.ApplicationContext;
+using hackaton.Models; 
 using Microsoft.AspNetCore.Mvc;
 
 namespace hackaton.Controllers
 {
     public class LogController : Controller
     {
+        ApplicationDBContext db;
+
+        public LogController(ApplicationDBContext context)
+        {
+            db = context;
+        }
+
+
         public IActionResult Index()
         {
             return View();
         }
 
-
-        public IActionResult Reg(User user)
+        [HttpPost]
+        public async Task<IActionResult> Reg(string name, string password, string repeatPassword)
         {
-            Console.WriteLine(user.name + "reg");
-            return RedirectToAction("Index", "Home");
+            if (password != repeatPassword)
+            {
+                // Обработка ошибки: пароли не совпадают
+                ModelState.AddModelError("", "Пароли не совпадают.");
+                return View("Index");
+            }
+
+            User user = new User
+            {
+                name = name,
+                password = password
+            };
+
+            db.Users.Add(user);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Log(User user)
+        public IActionResult Log(string name, string password)
         {
-            Console.WriteLine(user.name + "log");
             return RedirectToAction("Index", "Home");
         }
     }
