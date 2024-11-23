@@ -16,7 +16,7 @@
 
         public bool trunk { get; set; }
 
-        public bool isSelected { get; set; }
+        public int price { get; set; }
 
         public string tg_name { get; set; }
 

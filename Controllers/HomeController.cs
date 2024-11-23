@@ -69,9 +69,7 @@ namespace hackaton.Controllers
 
                 model.buses = query.ToList();
 
-                //Console.WriteLine(filter.trunk + " f " + filter.conditioner);
 
-                //Console.WriteLine("from db " + db.Buses.ToList()[0].conditioner);
             }
 
             return View(model);
@@ -81,11 +79,37 @@ namespace hackaton.Controllers
         [HttpPost]
         public void busSelectionForm(List<int> selectedBuses)
         {
-            foreach (var buses in selectedBuses)
+            if (selectedBuses == null || selectedBuses.Count == 0)
             {
-                Console.WriteLine(buses);
+                // Обработка случая, когда список пуст
+                // Например, можно выбросить исключение или просто вернуть
+                // Или можно просто вернуть, если не хотите выбрасывать исключение
+                Response.WriteAsync("<script>alert('Please select atleast 1 bus');</script>");
+
+                return;
+            }
+
+            var query = db.Buses.AsQueryable();
+
+            var tgNamesList = new List<string>();
+
+            foreach (var num in selectedBuses)
+            {
+                var bus = query.FirstOrDefault(b => b.id == num);
+
+                if (bus != null)
+                {
+                    tgNamesList.Add(bus.tg_name);
+                }
+                else
+                {
+                    // Обработка случая, когда автобус с данным id не найден
+                    Console.WriteLine($"Автобус с id {num} не найден.");
+                    // Вы можете также добавить сообщение в tgNamesList или выполнить другую логику
+                }
             }
         }
+
 
 
 
