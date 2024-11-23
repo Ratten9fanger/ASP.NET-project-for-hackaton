@@ -37,35 +37,35 @@ namespace hackaton.Controllers
 
             if (isSecondTime)
             {
-                if (!string.IsNullOrEmpty(filter.route))
-                {
-                    query = query.Where(b => b.route == filter.route);
-                }
+                //if (!string.IsNullOrEmpty(filter.route))
+                //{
+                //    query = query.Where(b => b.route == filter.route);
+                //}
 
-                if (filter.date != null)
-                {
-                    query = query.Where(b => b.date == filter.date);
-                }
+                //if (filter.date != null)
+                //{
+                //    query = query.Where(b => b.date == filter.date);
+                //}
 
-                if (!string.IsNullOrEmpty(filter.comfort))
-                {
-                    query = query.Where(b => b.comfort == filter.comfort);
-                }
+                //if (!string.IsNullOrEmpty(filter.comfort))
+                //{
+                //    query = query.Where(b => b.comfort == filter.comfort);
+                //}
 
-                if (!string.IsNullOrEmpty(filter.seats))
-                {
-                    query = query.Where(b => b.seats == filter.seats);
-                }
+                //if (!string.IsNullOrEmpty(filter.seats))
+                //{
+                //    query = query.Where(b => b.seats == filter.seats);
+                //}
 
-                if (filter.conditioner != null)
-                {
-                    query = query.Where(b => b.conditioner == filter.conditioner);
-                }
+                //if (filter.conditioner != null)
+                //{
+                //    query = query.Where(b => b.conditioner == filter.conditioner);
+                //}
 
-                if (filter.trunk != null)
-                {
-                    query = query.Where(b => b.trunk == filter.trunk);
-                }
+                //if (filter.trunk != null)
+                //{
+                //    query = query.Where(b => b.trunk == filter.trunk);
+                //}
 
                 model.buses = query.ToList();
 
@@ -78,11 +78,15 @@ namespace hackaton.Controllers
 
         }
 
-/*        public IActionResult Filter(Filter filter)
+        [HttpPost]
+        public void busSelectionForm(List<int> selectedBuses)
         {
-            Console.WriteLine($"{filter.route}, {filter.date}, {filter.comfort}, {filter.seats}, {filter.trunk}, {filter.conditioner},");
-            return RedirectToAction("Index");
-        }*/
+            foreach (var buses in selectedBuses)
+            {
+                Console.WriteLine(buses);
+            }
+        }
+
 
 
 

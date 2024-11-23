@@ -8,7 +8,7 @@
     <nav>
         <a href="#" class="active">Главная</a>
         <a href="#">Ответы на заявки</a> 
-        <a href="#">О нас</a>
+        <a href="#">Добавление нового автобуса</a>
     </nav>
 </header>
 
@@ -78,30 +78,36 @@
                 
                 @if (Model.buses != null && Model.buses.Any())
                 {
-                        @foreach (var bus in Model.buses)
-                        {
-                        <div class="card">
+                    <form asp-action="busSelectionForm" class="results_form"  method="post"> 
 
-                            <img src="@bus.img" alt="bus" class="card-image">
-                    
-                            <div class="card-content">
-                                <h2 class="card-title">@bus.route</h2>
-                                <p class="card-description">@bus.date</p>
-                                <p class="card-description">@bus.comfort</p>
-                            </div>
+                        <div class="results_container">
+                            @foreach (var bus in Model.buses)
+                            {
+                                <div class="card">
 
-                          @* ОБРАБОТКА ВЫБОРА *@
-                            <label for="isSelected"> 
-                                <input type="checkbox" id="isSelected" name="isSelected">
-                                Выбрать
-                            </label>
+                                    <img src="@bus.img" alt="bus" class="card-image">
 
+                                    <div class="card-content">
+                                        <h2 class="card-title">@bus.route</h2>
+                                        <p class="card-description">@bus.date</p>
+                                        <p class="card-description">@bus.comfort</p>
+                                    </div>
+
+                                    @* ОБРАБОТКА ВЫБОРА *@
+                                    <label for="bus_@bus.id"> <!-- Убедитесь, что id уникален -->
+                                        <input type="checkbox" value="@bus.id" id="bus_@bus.id" name="selectedBuses">
+                                        Выбрать
+                                    </label>
+                                </div>
+                            }
                         </div>
-                        }
+
+                        <button type="submit">Отправить</button> 
+                    </form>
                 }
                 else
                 {
-                    <p>Нет доступных автобусов для выбранных фильтров.</p>
+                    <p class="notfound">Нет доступных автобусов для выбранных фильтров.</p>
                 }
 
             </div>
